@@ -116,11 +116,11 @@ client.login(process.env.token).then(
 );
 
 
-app.use(express.static(path.join(__dirname, './API/Client')));
+app.use(express.static(path.join(__dirname, './index.html')));
 app.use(express.static(path.join(__dirname, './API/Files')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'API/Client/index.html'));
+  res.sendFile(path.join(__dirname, './index.html'));
 });
 
 app.get('/api/ban', (req, res) => {
