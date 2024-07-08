@@ -10,14 +10,13 @@ const {
   ButtonBuilder,
   ButtonStyle
 } = require("discord.js");
-require("colors");
-require("dotenv").config();
 
 const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v9");
 
-const fs = require("fs");
-const path = require("path");
+const express = require('express');
+const app = express();
+const path = require('path');
 
 const client = new Client({
   intents: [
@@ -113,5 +112,20 @@ process.on("uncaughtExceptionMonitor", async (err, origin) => {
 });
 
 client.login(process.env.token).then(
-  console.log(`Logged into the bot.`.green)
-)
+  console.log(`Logged into the bot.`)
+);
+
+
+app.use(express.static(path.join(__dirname, './API/Files')));
+
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'API/Files/ban.json'));
+});
+
+app.get('/api/ban', (req, res) => {
+  res.sendFile(path.join(__dirname, 'API/Files/ban.json'));
+});
+
+app.listen(3000, () => {
+  console.log(`Listening to port 3000. http://localhost:3000`)
+})
