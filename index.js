@@ -116,10 +116,11 @@ client.login(process.env.token).then(
 );
 
 
+app.use(express.static(path.join(__dirname, './API/Client')));
 app.use(express.static(path.join(__dirname, './API/Files')));
 
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'API/Files/ban.json'));
+  res.sendFile(path.join(__dirname, 'API/Client/index.html'));
 });
 
 app.get('/api/ban', (req, res) => {
